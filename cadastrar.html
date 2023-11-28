@@ -1,0 +1,48 @@
+<?php
+    session_start();
+
+    ob_start();
+
+//    include_once'conexao.php';
+
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Cadastrar</h1>
+
+    <?php
+        include('conexao.php');
+        $dadosclin = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        
+        if(!empty($dadosclin['SendClinica'])){
+            var_dump($dadosclin);
+
+            $query_clinica = "INSERT INTO clinica (nome, email, cnpj, senha, endereco) VALUES ('".$dadosclin['nome']."','".$dadosclin['email']."','".$dadosclin['cnpj']."', '".$dadosclin['senha']."', '".$dadosclin['endereco']."')";
+            
+            $mysqli->query($query_clinica);
+        }
+    ?>
+    <form action="" method="POST">
+        <label>Nome</label>
+        <input type="text" name="nome" placeholder="nome"><br><br>
+        <label>Email</label>
+        <input type="email" name="email" placeholder="email"><br><br>
+        <label>CNPJ</label>
+        <input type="text" name="cnpj" placeholder="CNPJ"><br><br>
+        <label>Senha</label>
+        <input type="password" name="senha" placeholder="senha"><br><br>
+        <label>Endereço</label>
+        <input type="text" name="endereco" placeholder="Endereço"><br><br>
+
+        <input type="submit" name="SendClinica" value="cadastrar"><br><br>
+        
+    </form>
+</body>
+</html>
